@@ -6,8 +6,9 @@ pages_build_output_dir = ".vercel/output/static"
 
 [[d1_databases]]
 binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "my-app"
-database_id = "a9b5ffa7-1b8c-4d27-b9c2-66a824430bc2"
+database_name = "project-3-db"
+database_id = "1ca9b7ac-f088-4e7f-8868-1b61daa2f192"
+preview_database_id = "DB"
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
