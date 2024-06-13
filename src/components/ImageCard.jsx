@@ -11,8 +11,8 @@ export default function ImageCardComponent({ src, title, onClick }) {
         <div className="relative h-64 md:h-96">
           <Image
             src={
-              src ||
-              "https://images.freeimages.com/fic/images/icons/1811/houses/128/house_yellow.png?fmt=webp&w=500"
+              src || "/images/map.png"
+              // "https://images.freeimages.com/fic/images/icons/1811/houses/128/house_yellow.png?fmt=webp&w=500"
             }
             alt={title}
             layout="fill"
