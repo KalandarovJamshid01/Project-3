@@ -79,8 +79,51 @@ const Contact = () => {
             className={"flex flex-col px-2"}
             onSubmit={async (e) => {
               e.preventDefault();
+              const formElement =e.target
+              console.log(formElement)
+              const form=new FormData(formElement)
+              console.log(form)
               const uploadImage = await handleUpload();
-              console.log(uploadImage)
+              const img = {
+                img_url: uploadImage?.secure_url,
+                file_name: uploadImage?.original_filename,
+                width: uploadImage?.width,
+                bytes: uploadImage?.bytes,
+                height: uploadImage?.height,
+                format: uploadImage?.format,
+                title: form.get("title"),
+                context: form.get("short-description"),
+                folder: "contact_images",
+              };
+              const response = await fetch("/api/add-image", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body:JSON.stringify(img)
+              });
+              const data = await response.json();
+              console.log(data);
+              const contact = {
+                title: form.get("title"),
+                mail: form.get("mail"),
+                contact: form.get("contact"),
+                short_description: form.get("short-description"),
+                long_description: form.get("long-description"),
+                img_url: uploadImage?.secure_url,
+                img_id: data?.data.id
+              };
+              
+              const resContact = await fetch("/api/add-contact", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(contact)
+              });
+              console.log(resContact);
+              const result = await resContact.json();
+              console.log(result);
             }}
           >
             <label

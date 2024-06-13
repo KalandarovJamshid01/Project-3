@@ -4,7 +4,7 @@ import Image from "next/image";
 import MainSectionBanner from "@/components/mainHeader";
 import ModalComponent from "@/components/modal";
 import ImageCardComponent from "@/components/ImageCard";
-
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 export default function Page() {
   const [images, setImages] = useState([
   ]);
@@ -84,6 +84,25 @@ export default function Page() {
             onClick={() => openModal(index)}
           />
         ))}
+      </div>
+      <div className="pagination flex flex-row justify-center items-center gap-5 mb-10">
+        <div className="left-icon">
+          <BsArrowLeft
+            size={20}
+            className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
+          />
+        </div>
+        <div className="current-page">
+          <h4 className="text-[16px] md:text-[18px] lg:text-[20px] font-medium">
+            {page}/10
+          </h4>
+        </div>
+        <div className="right-icon">
+          <BsArrowRight
+            size={20}
+            className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
+          />
+        </div>
       </div>
       {isModalOpen && (
         <ModalComponent
