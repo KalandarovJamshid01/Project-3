@@ -18,42 +18,42 @@ const Contact = () => {
     setPreviewUrl(URL.createObjectURL(file));
   };
 
-  // const handleUpload = async () => {
-  //   if (!selectedFile) return;
+  const handleUpload = async () => {
+    if (!selectedFile) return;
 
-  //   const formData = new FormData();
-  //   formData.append("file", selectedFile);
+    const formData = new FormData();
+    formData.append("file", selectedFile);
 
-  //   try {
-  //     const response = await fetch("/api/upload", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-  //     const data = await response.json();
-  //     console.log(data);
-  //     return data.result;
-  //   } catch (error) {
-  //     console.error("Error uploading image:", error);
-  //   }
-  // };
+      const data = await response.json();
+      console.log(data);
+      return data.result;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
 
-  // const handleUploadImages = async (body) => {
-  //   try {
-  //     const response = await axios({
-  //       method: "POST",
-  //       url: "https://for-images.kalandarovjamshid01.workers.dev/images",
-  //       data: JSON.stringify(body),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  const handleUploadImages = async (body) => {
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "https://for-images.kalandarovjamshid01.workers.dev/images",
+        data: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className={"relative overflow-hidden"}>
       <div className="containerr">
@@ -77,52 +77,11 @@ const Contact = () => {
         <div className="relative h-auto mx-1">
           <form
             className={"flex flex-col px-2"}
-            // onSubmit={async (e) => {
-            //   e.preventDefault();
-
-            //   const uploadImage = await handleUpload();
-
-            //   const formElement = e.target;
-            //   const form = new FormData(formElement);
-
-            //   const img = {
-            //     img_url: uploadImage?.secure_url,
-            //     file_name: uploadImage?.original_filename,
-            //     width: uploadImage?.width,
-            //     bytes: uploadImage?.bytes,
-            //     height: uploadImage?.height,
-            //     format: uploadImage?.format,
-            //     title: form.get("title"),
-            //     context: form.get("short-description"),
-            //     folder: "contact_image",
-            //   };
-
-            //   await handleUploadImages(img);
-
-            //   const data = {
-            //     title: form.get("title"),
-            //     mail: form.get("mail"),
-            //     contact: form.get("contact"),
-            //     short_description: form.get("short-description"),
-            //     long_description: form.get("long-description"),
-            //     img_url: uploadImage?.secure_url,
-            //   };
-
-            //   const config = {
-            //     method: "post",
-            //     url: "https://project-1-submissions.kalandarovjamshid01.workers.dev",
-            //     data: data,
-            //   };
-
-            //   axios(config)
-            //     .then((response) => {
-            //       console.log(JSON.stringify(response.data));
-            //       //   router.push("/after-construction");
-            //     })
-            //     .catch((error) => {
-            //       console.log(error);
-            //     });
-            // }}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const uploadImage = await handleUpload();
+              console.log(uploadImage)
+            }}
           >
             <label
               htmlFor="title"

@@ -7,12 +7,6 @@ import ImageCardComponent from "@/components/ImageCard";
 
 export default function Page() {
   const [images, setImages] = useState([
-    {
-      src: "/images/mainBanner.png",
-    },
-    {
-      src: "/images/mainBanner2.png",
-    },
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -24,12 +18,11 @@ export default function Page() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch(`/api/get-images?page=${page}&pageSize=${pageSize}`);
+        const response = await fetch(`/api/images?page=${page}&pageSize=${pageSize}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setImages(data);
         console.log("Fetched images:", data);
       } catch (error) {
