@@ -8,9 +8,11 @@ CREATE TABLE connections (
     long_description TEXT,
     contact TEXT,
     img_url TEXT,
+    img_id INT,
     created_at TIMESTAMP
 );
-Drop Table IF EXISTS connections;
+
+Drop Table IF EXISTS images;
 
 CREATE TABLE images (
     id SERIAL PRIMARY KEY,
