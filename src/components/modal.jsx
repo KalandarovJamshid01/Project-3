@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 
@@ -23,13 +24,10 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
               닫기 X
             </button>
           </div>
-          <div className={"flex w-full gap-12 mb-4"}>
-            <div className="relative w-full lg:w-[592px] h-72 lg:h-[577px] md:h-96">
+          <div className={"flex sm:flex-row flex-col w-full gap-12 mb-4"}>
+            <div className="relative w-full lg:w-[592px] h-48 sm:h-72 lg:h-[577px] md:h-96">
               <Image
-                src={
-                  images[currentIndex].src ||
-                  "https://images.freeimages.com/fic/images/icons/1811/houses/128/house_yellow.png?fmt=webp&w=500"
-                }
+                src={images[currentIndex].src || "/images/map.png"}
                 alt={images[currentIndex].alt}
                 layout="fill"
                 objectFit="cover"
@@ -60,7 +58,9 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
           <div className={"flex relative h-14"}>
             <button
               onClick={handlePrev}
-              className={"absolute left-0 bottom-0 w-[50%]"}
+              className={
+                "absolute left-0 top-0 md:top-auto md:bottom-0 w-[50%]"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,12 +68,13 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
                 height="54"
                 viewBox="0 0 590 54"
                 fill="none"
+                className=" hidden md:block md:w-[400px] lg:w-auto"
               >
                 <path d="M0 0H590L562.936 54H0V0Z" fill="#D4D4D4" />
               </svg>
               <div
                 className={
-                  "w-10 h-10 border border-b-white text-white rounded-full flex " +
+                  "w-10 h-10 border bg-black md:bg-transparent border-b-white text-white rounded-full flex " +
                   "items-center justify-center absolute top-2 left-1/3"
                 }
               >
@@ -82,7 +83,7 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
             </button>
             <button
               onClick={handleNext}
-              className={"absolute right-0 bottom-0"}
+              className={"absolute right-5 top-0 md:top-auto md:bottom-0"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,6 +91,7 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
                 height="54"
                 viewBox="0 0 589 54"
                 fill="none"
+                className="hidden md:block md:w-[400px] lg:w-auto"
               >
                 <path
                   d="M589 54H0L27.0183 -3.8147e-06H589V54Z"
@@ -98,7 +100,7 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
               </svg>
               <div
                 className={
-                  "w-10 h-10 border border-b-white text-white rounded-full flex " +
+                  "w-10 h-10 bg-black md:bg-transparent border border-b-white text-white rounded-full flex " +
                   "items-center justify-center absolute top-2 right-1/3"
                 }
               >

@@ -9,7 +9,14 @@ import ImageCardComponent from "@/components/ImageCard";
 // import axios from "axios";
 
 export default function Page() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([
+    {
+      ud: "/images/mainBanner.png",
+    },
+    {
+      ud: "/images/mainBanner2.png",
+    },
+  ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -62,10 +69,7 @@ export default function Page() {
       <div className="relative h-64 md:h-96 mx-5">
         {images.length > 2 && (
           <Image
-            src={
-              images[0].src ||
-              "https://images.freeimages.com/fic/images/icons/1811/houses/128/house_yellow.png?fmt=webp&w=500"
-            }
+            src={images[0].src || "/images/map.png"}
             alt={images[0].title}
             layout="fill"
             objectFit="cover"
