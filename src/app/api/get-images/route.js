@@ -8,13 +8,9 @@ export async function GET(req) {
     const pageSize = parseInt(searchParams.get('pageSize'), 10) || 10;
     const offset = (page - 1) * pageSize;
 
-    console.log("Page:", page);
-    console.log("PageSize:", pageSize);
-    console.log("Offset:", offset);
 
     const { DB } = getRequestContext().env;
 
-    console.log("Database context:", DB);
 
     const response = await DB.prepare(
       `SELECT * FROM images WHERE folder="my_website_images" ORDER BY created_at DESC LIMIT ? OFFSET ?`
@@ -22,7 +18,6 @@ export async function GET(req) {
       .bind(pageSize, offset)
       .all();
 
-    console.log("Database response:", response);
 
     return NextResponse.json(response.results);
   } catch (error) {
