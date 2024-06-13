@@ -1,20 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-
 import Image from "next/image";
 import MainSectionBanner from "@/components/mainHeader";
 import ModalComponent from "@/components/modal";
 import ImageCardComponent from "@/components/ImageCard";
-// import { MainBannerSection, Modal, ImageCard } from "@/src/components";
-// import axios from "axios";
 
 export default function Page() {
   const [images, setImages] = useState([
     {
-      ud: "/images/mainBanner.png",
+      src: "/images/mainBanner.png",
     },
     {
-      ud: "/images/mainBanner2.png",
+      src: "/images/mainBanner2.png",
     },
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,22 +19,26 @@ export default function Page() {
 
   const page = 1;
   const pageSize = 10;
-  const query = "my_website_image";
+  const query = "my_website_images";
 
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     try {
-  //       const response = await axios.get("/api/getImages", {
-  //         params: { page, pageSize, q: query },
-  //       });
-  //       setImages(response.data);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(`/api/get-images?page=${page}&pageSize=${pageSize}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setImages(data);
+        console.log("Fetched images:", data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
-  //   fetchImages();
-  // }, [page, pageSize, query]);
+    fetchImages();
+  }, [page, pageSize, query]);
 
   const openModal = (index) => {
     setSelectedImageIndex(index);

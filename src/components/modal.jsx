@@ -25,7 +25,7 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
             </button>
           </div>
           <div className={"flex sm:flex-row flex-col w-full gap-12 mb-4"}>
-            <div className="relative w-full lg:w-[592px] h-48 sm:h-72 lg:h-[577px] md:h-96">
+            <div className="relative w-full lg:w-[500px] h-48 sm:h-68 lg:h-[450px] md:h-72">
               <Image
                 src={images[currentIndex].src || "/images/map.png"}
                 alt={images[currentIndex].alt}
