@@ -32,8 +32,10 @@ export async function POST(req) {
 
       uploadStream.end(buffer);
     });
-
+    console.log("Route data", result);
+    
     return NextResponse.json({ result });
+    
   } catch (error) {
     console.error("Error processing form data:", error);
     return NextResponse.json(

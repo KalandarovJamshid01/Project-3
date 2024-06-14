@@ -18,42 +18,42 @@ const Contact = () => {
     setPreviewUrl(URL.createObjectURL(file));
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) return;
+  // const handleUpload = async () => {
+  //   if (!selectedFile) return;
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
+  //   const formData = new FormData();
+  //   formData.append("file", selectedFile);
 
-    try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch("/api/upload", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
 
-      const data = await response.json();
-      console.log(data);
-      return data.result;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-    }
-  };
+  //     const data = await response.json();
+  //     console.log(data);
+  //     return data.result;
+  //   } catch (error) {
+  //     console.error("Error uploading image:", error);
+  //   }
+  // };
 
-  const handleUploadImages = async (body) => {
-    try {
-      const response = await axios({
-        method: "POST",
-        url: "https://for-images.kalandarovjamshid01.workers.dev/images",
-        data: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const handleUploadImages = async (body) => {
+  //   try {
+  //     const response = await axios({
+  //       method: "POST",
+  //       url: "https://for-images.kalandarovjamshid01.workers.dev/images",
+  //       data: JSON.stringify(body),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   return (
     <div className={"relative overflow-hidden"}>
       <div className="containerr">
@@ -83,7 +83,8 @@ const Contact = () => {
               console.log(formElement)
               const form=new FormData(formElement)
               console.log(form)
-              const uploadImage = await handleUpload();
+              // const uploadImage = await handleUpload();
+              const uploadImage={img_url:"images/upload"}
               const img = {
                 img_url: uploadImage?.secure_url,
                 file_name: uploadImage?.original_filename,

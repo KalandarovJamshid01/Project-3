@@ -5,7 +5,6 @@ export const runtime = 'edge';
 
 export async function POST(request) {
   try {
-    console.log(request)
     const { DB } = getRequestContext().env;
     const data = await request.json();
     const { mail, title, short_description, long_description, contact, img_url, img_id } = data;
