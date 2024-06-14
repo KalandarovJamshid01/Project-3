@@ -83,7 +83,7 @@ export default function ModalComponent({ images, initialIndex, onClose }) {
             </button>
             <button
               onClick={handleNext}
-              className={"absolute right-5 top-0 md:top-auto md:bottom-0"}
+              className={"absolute right-5 w-[32%] md:w-auto top-0 md:top-auto md:bottom-0"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
