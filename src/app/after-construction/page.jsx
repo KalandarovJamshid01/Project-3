@@ -4,15 +4,9 @@ import Image from "next/image";
 import MainSectionBanner from "@/components/mainHeader";
 import ModalComponent from "@/components/modal";
 import ImageCardComponent from "@/components/ImageCard";
-
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 export default function Page() {
   const [images, setImages] = useState([
-    {
-      src: "/images/mainBanner.png",
-    },
-    {
-      src: "/images/mainBanner2.png",
-    },
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -24,12 +18,11 @@ export default function Page() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch(`/api/get-images?page=${page}&pageSize=${pageSize}`);
+        const response = await fetch(`/api/images?page=${page}&pageSize=${pageSize}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setImages(data);
         console.log("Fetched images:", data);
       } catch (error) {
@@ -91,6 +84,25 @@ export default function Page() {
             onClick={() => openModal(index)}
           />
         ))}
+      </div>
+      <div className="pagination flex flex-row justify-center items-center gap-5 mb-10">
+        <div className="left-icon">
+          <BsArrowLeft
+            size={20}
+            className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
+          />
+        </div>
+        <div className="current-page">
+          <h4 className="text-[16px] md:text-[18px] lg:text-[20px] font-medium">
+            {page}/10
+          </h4>
+        </div>
+        <div className="right-icon">
+          <BsArrowRight
+            size={20}
+            className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
+          />
+        </div>
       </div>
       {isModalOpen && (
         <ModalComponent

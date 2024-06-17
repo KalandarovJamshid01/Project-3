@@ -34,6 +34,7 @@ CREATE TABLE images (
     format TEXT,
     folder TEXT,
     bytes INT,
+    public_id INT,
     created_at TIMESTAMP
 );
 
