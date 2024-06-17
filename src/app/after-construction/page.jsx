@@ -10,8 +10,7 @@ export default function Page() {
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
-  const page = 1;
+  const [page, setPage] = useState(1)
   const pageSize = 10;
   const query = "my_website_images";
 
@@ -79,7 +78,7 @@ export default function Page() {
         {images.map((image, index) => (
           <ImageCardComponent
             key={index}
-            src={image.src}
+            src={image.img_url}
             title={image.title}
             onClick={() => openModal(index)}
           />
@@ -89,6 +88,7 @@ export default function Page() {
         <div className="left-icon">
           <BsArrowLeft
             size={20}
+            onClick={()=>{setPage(page-1)}}
             className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
           />
         </div>
@@ -100,6 +100,7 @@ export default function Page() {
         <div className="right-icon">
           <BsArrowRight
             size={20}
+            onClick={()=>{setPage(page+1)}}
             className="w-[40px] md:w-[45px] lg:w-[50px] h-[40px] md:h-[45px] lg:h-[50px] border-2 rounded-[30px] border-black p-[5px] md:p-[8px] lg:p-[10px] cursor-pointer"
           />
         </div>

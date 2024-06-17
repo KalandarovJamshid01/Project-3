@@ -9,7 +9,18 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/dl8bppbqg/image/upload/**",
+      },
+    ],
+  },
+};
 
 
 export default nextConfig;

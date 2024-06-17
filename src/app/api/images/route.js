@@ -16,7 +16,7 @@ export async function GET(request) {
         )
           .bind(pageSize, offset)
           .all();
-
+        console.log(response)
 
         return NextResponse.json(response.results);
       } catch (error) {
