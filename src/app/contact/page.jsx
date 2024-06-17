@@ -37,7 +37,60 @@ const Contact = () => {
       console.error("Error uploading image:", error);
     }
   };
+const addImage = async(uploadImage) => {
 
+  try {
+    const img = {
+      img_url: uploadImage?.secure_url,
+      file_name: uploadImage?.original_filename,
+      width: uploadImage?.width,
+      bytes: uploadImage?.bytes,
+      height: uploadImage?.height,
+      format: uploadImage?.format,
+      title: "Title",
+      context: "Contact Image",
+      folder: "contact_images",
+      public_id:uploadImage?.public_id
+    };
+    const response = await fetch("/api/add-image", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(img)
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const addContact=async(form,img_url,img_id)=>{
+  try {
+    const contact = {
+      title: form.get("title"),
+      mail: form.get("mail"),
+      contact: form.get("contact"),
+      short_description: form.get("short-description"),
+      long_description: form.get("long-description"),
+      img_url: img_url,
+      img_id: img_id
+    };
+    
+    const resContact = await fetch("/api/add-contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contact)
+    });
+    const result = await resContact.json();
+    return result;
+  } catch (error) {
+    console.log(error)
+  }
+}
   // const handleUploadImages = async (body) => {
   //   try {
   //     const response = await axios({
@@ -80,50 +133,10 @@ const Contact = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               const formElement =e.target
-              console.log(formElement)
               const form=new FormData(formElement)
-              console.log(form)
               const uploadImage = await handleUpload();
-              const img = {
-                img_url: uploadImage?.secure_url,
-                file_name: uploadImage?.original_filename,
-                width: uploadImage?.width,
-                bytes: uploadImage?.bytes,
-                height: uploadImage?.height,
-                format: uploadImage?.format,
-                title: form.get("title"),
-                context: form.get("short-description"),
-                folder: "contact_images",
-              };
-              const response = await fetch("/api/add-image", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body:JSON.stringify(img)
-              });
-              const data = await response.json();
-              console.log(data);
-              const contact = {
-                title: form.get("title"),
-                mail: form.get("mail"),
-                contact: form.get("contact"),
-                short_description: form.get("short-description"),
-                long_description: form.get("long-description"),
-                img_url: uploadImage?.secure_url,
-                img_id: data?.data.id
-              };
-              
-              const resContact = await fetch("/api/add-contact", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(contact)
-              });
-              console.log(resContact);
-              const result = await resContact.json();
-              console.log(result);
+              const image=await addImage(uploadImage)
+              const contact=await addContact(form, uploadImage.url,image.data.id)
             }}
           >
             <label

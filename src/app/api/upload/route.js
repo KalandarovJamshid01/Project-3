@@ -17,51 +17,23 @@ export async function POST(req) {
     const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME; // Use environment variable for Cloud name
 
     const timestamp = Math.floor(Date.now() / 1000);
-    const paramsToSign = `timestamp=${timestamp}${CLOUDINARY_API_SECRET}`;
+    const paramsToSign = `public_id=${file.name}&timestamp=${timestamp}${CLOUDINARY_API_SECRET}`;
 
     const signature = CryptoJS.SHA1(paramsToSign).toString();
     // Append the Blob to the FormData object
     formData.append('file', file);
-    formData.append('public_id', `contactImage`);
+    formData.append('public_id', file.name);
     formData.append('signature', signature);
     formData.append('api_key', CLOUDINARY_API_KEY);
     formData.append('timestamp', timestamp);
-    console.log(formData);
-    const result = await fetch(
+    const response = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
       {
         method: 'POST',
         body: formData,
       }
     );
-    // const result = await new Promise((resolve, reject) => {
-    //   const uploadStream = cloudinary.uploader.upload_stream(
-    //     {
-    //       folder: "contact_images",
-    //       tags: ["website_image", "example"],
-    //       context: "alt=Contact Image|caption=Caption",
-    //     },
-    //     (error, result) => {
-    //       if (error) {
-    //         reject(error);
-    //       } else {
-    //         resolve(result);
-    //       }
-    //     }
-    //   );
-
-    //   uploadStream.end(buffer);
-    // });
-    if (!result.result) {
-      return NextResponse.json(
-        { message: "File wasn't uploaded" },
-        {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-    }
-    console.log('Route data', result);
+    const result=await response.json()
 
     return NextResponse.json({ result });
   } catch (error) {

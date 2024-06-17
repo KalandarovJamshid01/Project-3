@@ -63,7 +63,7 @@ export default function Page() {
       <div className="relative h-64 md:h-96 mx-5">
         {images.length > 2 && (
           <Image
-            src={images[0].src || "/images/map.png"}
+            src={images[0].img_url || "/images/map.png"}
             alt={images[0].title}
             layout="fill"
             objectFit="cover"
